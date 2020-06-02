@@ -26,7 +26,7 @@
 <link rel="shortcut icon" href="/images/title.jpg">
 
 
-<title>archives- 2020 - Hexo</title>
+<title>“我的第一篇博客文章” - Hexo</title>
 
 <meta name="keywords" content="">
 
@@ -114,8 +114,10 @@
 
             <div class="page-title">
     <ul>
-        <li><a href="/" data-name="Home" title="Back Home">Home</a></li>
-        <li><a href="/tags" data-name="Tag Cloud" title="Tag Cloud">Tags</a></li>
+        <li><a href="/">Recent Posts</a></li>
+        
+        
+        
         <li class="page-search">
     <form id="search" class="search-form">
         <input type="text"
@@ -131,55 +133,81 @@
 <div class="main-inner">
     <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
         <div class="post-header">
-            <h3 class="post-title">Nice 🥳 2 posts in total. Keep on posting.</h3>
-        </div>
-        
-
-        <div class="post-content markdown-body" itemprop="articleBody">
-            <div class="archives">
-                
-                
-                
-                
-                
-                <div class="archives-item">
-                    <h2>2020年06月</h2>
-                    <ul class="archives_list">
-                        
-                        <li>02日08:41:27
-                            <a href="/2020/06/02/%E2%80%9C%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%E2%80%9D/">“我的第一篇博客文章”</a>
-                            
-                        </li>
-                        
-                    </ul>
-                </div>
-                
-                
-                
-                
-                
-                <div class="archives-item">
-                    <h2>2020年05月</h2>
-                    <ul class="archives_list">
-                        
-                        <li>11日21:18:39
-                            <a href="/2020/05/11/hello-world/">Hello World</a>
-                            
-                        </li>
-                        
-                    </ul>
-                </div>
-                
-                
+            <div class="post-author clearfix">
+                <a class="avatar fleft" href="https://zhang-java123.github.io"
+                   target="_blank">
+                    <img width="48" src="/images/title.jpg" alt="avatar"/>
+                </a>
+                <p><span class="label">Author</span>
+                    <a href="https://zhang-java123.github.io"
+                       target="_blank">javashare</a>
+                    <span title="Last edited at&nbsp;2020-06-02">2020-06-02</span>
+                </p>
+                <p>学知识，知识分享</p>
+            </div>
+            <h2 class="post-title">“我的第一篇博客文章”</h2>
+            <div class="post-meta">
+                emm... 485 words in the article |
+                you are the&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>th friend who reading now
             </div>
         </div>
+        <div class="post-content markdown-body">
+            <h1 id="linux常见指令"><a href="#linux常见指令" class="headerlink" title="linux常见指令"></a>linux常见指令</h1><p>查看firewall服务状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
+
+<p>开启、重启、关闭、firewalld.service服务</p>
+<p>开启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service firewalld start</span><br></pre></td></tr></table></figure>
+
+<p>重启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service firewalld restart</span><br></pre></td></tr></table></figure>
+
+<p>关闭</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service firewalld stop</span><br></pre></td></tr></table></figure>
+
+<p>查看防火墙规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --list-all    # 查看全部信息</span><br><span class="line">firewall-cmd --list-ports  # 只看端口信息</span><br></pre></td></tr></table></figure>
+
+<p>开启端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">开端口命令：firewall-cmd --zone&#x3D;public --add-port&#x3D;80&#x2F;tcp --permanent</span><br><span class="line">重启防火墙：systemctl restart firewalld.service</span><br><span class="line"></span><br><span class="line">命令含义：</span><br><span class="line">--zone #作用域</span><br><span class="line">--add-port&#x3D;80&#x2F;tcp  #添加端口，格式为：端口&#x2F;通讯协议</span><br><span class="line">--permanent   #永久生效，没有此参数重启后失效</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+            
+                
+
+            
+        </div>
+        <div class="post-tool">
+            <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> Donate
+            </a>
+        </div>
+        
+        <div class="post-tags">Tags：
+            
+        </div>
+        
     </article>
+    
+        <p style="text-align: center">This article just represents my own viewpoint. If there is something wrong, please correct me.</p>
+    
+    
+    
+
 </div>
+
+<script src="/js/busuanzi.pure.mini.js"></script>
+
+
 
         </div><!-- end #main-->
     </div><!-- end #body -->
     <footer class="footer">
-    <div class="footer-inner" style="text-align: left">
+    <div class="footer-inner" style="text-align: center">
         <p>
             <a href="/about"  title="About">About</a>&nbsp;&nbsp<em>·</em>&nbsp;&nbsp
             <!-- 自定义链接 -->
