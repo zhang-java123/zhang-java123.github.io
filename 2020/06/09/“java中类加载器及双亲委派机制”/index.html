@@ -8,17 +8,18 @@
   <link rel="dns-prefetch" href="https://github.com/zhang-java123/zhang-java123.github.io.git">
   <title>“java中类加载器及双亲委派机制” | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java中类加载器及双亲委派机制 java程序执行过程粗略来说分为两步， ​    第一步：将java源码(.java文件)通过编译器(javac.exe)编译成(.class字节码文件) ​    第二步： java虚拟机，通过类加载器加载Student.class字节码文件到内存，然后运行内存中的字节码指令了。   一、类的加载 类的加载概念：类的加载指的是将类的.class文件中的二进制数据">
+  <meta name="description" content="java中类加载器及双亲委派机制 java程序执行过程粗略来说分为两步， ​    第一步：将java源码(.java文件)通过编译器(javac.exe)编译成(.class字节码文件) ​    第二步： java虚拟机，通过类加载器加载Student.class字节码文件到内存，然后运行内存中的字节码指令了。   一、类加载机制 类加载机制：Java虚拟机把描述类的数据从class文件加载到">
 <meta property="og:type" content="article">
 <meta property="og:title" content="“java中类加载器及双亲委派机制”">
 <meta property="og:url" content="https://github.com/zhang-java123/zhang-java123.github.io.git/2020/06/09/%E2%80%9Cjava%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%8F%8A%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E2%80%9D/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="java中类加载器及双亲委派机制 java程序执行过程粗略来说分为两步， ​    第一步：将java源码(.java文件)通过编译器(javac.exe)编译成(.class字节码文件) ​    第二步： java虚拟机，通过类加载器加载Student.class字节码文件到内存，然后运行内存中的字节码指令了。   一、类的加载 类的加载概念：类的加载指的是将类的.class文件中的二进制数据">
+<meta property="og:description" content="java中类加载器及双亲委派机制 java程序执行过程粗略来说分为两步， ​    第一步：将java源码(.java文件)通过编译器(javac.exe)编译成(.class字节码文件) ​    第二步： java虚拟机，通过类加载器加载Student.class字节码文件到内存，然后运行内存中的字节码指令了。   一、类加载机制 类加载机制：Java虚拟机把描述类的数据从class文件加载到">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="d:%5Cblog%5Cblog%5Csource%5Cimages%5Cjava%E6%B5%81%E7%A8%8B.PNG">
+<meta property="og:image" content="d:%5Cblog%5Cblog%5Csource%5Cimages%5C%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
 <meta property="og:image" content="d:%5Cblog%5Cblog%5Csource%5Cimages%5C%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E5%8E%9F%E5%88%99.PNG">
 <meta property="article:published_time" content="2020-06-09T07:32:51.819Z">
-<meta property="article:modified_time" content="2020-06-09T11:54:12.796Z">
+<meta property="article:modified_time" content="2020-06-11T13:07:10.673Z">
 <meta property="article:author" content="zhang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="d:%5Cblog%5Cblog%5Csource%5Cimages%5Cjava%E6%B5%81%E7%A8%8B.PNG">
@@ -181,20 +182,22 @@
 <p>​    第一步：将java源码(.java文件)通过编译器(javac.exe)编译成(.class字节码文件)</p>
 <p>​    第二步： java虚拟机，通过类加载器加载Student.class字节码文件到内存，然后运行内存中的字节码指令了。 </p>
 <p><img src="D:%5Cblog%5Cblog%5Csource%5Cimages%5Cjava%E6%B5%81%E7%A8%8B.PNG" alt=""></p>
-<h2 id="一、类的加载"><a href="#一、类的加载" class="headerlink" title="一、类的加载"></a>一、类的加载</h2><p> <strong>类的加载概念</strong>：类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在堆区创建一个 java.lang.Class对象，用来封装类在方法区内的数据结构 。</p>
+<h2 id="一、类加载机制"><a href="#一、类加载机制" class="headerlink" title="一、类加载机制"></a>一、类加载机制</h2><p> <strong>类加载机制</strong>：Java虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。</p>
   <a id="more"></a> 
 
-<p> <strong>类加载的流程</strong>：类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期包括：加载、验证、准备、解析、初始化、使用和卸载七个阶段 。 其中<strong>类加载的过程包括了加载、验证、准备、解析、初始化五个阶段</strong> 。</p>
-<h4 id="1、加载"><a href="#1、加载" class="headerlink" title="1、加载"></a>1、加载</h4><p>”加载“是”类加机制”的第一个过程，在加载阶段，虚拟机主要完成三件事：</p>
+<p> <strong>类加载的流程</strong>：一个类从被加载到虚拟机内存中开始，到卸载出内存为止，它的整个生命周期包括：加载（Loading）、验证（Verification）、准备（Preparation）、解析（Resolution）、初始化（Initialization）、使用（Using）和卸载（Unloading）七个阶段 。其中验证、准备、解析三个部分统称为连接（Linking）。 </p>
+<p><img src="D:%5Cblog%5Cblog%5Csource%5Cimages%5C%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt=""></p>
+<h4 id="1、加载"><a href="#1、加载" class="headerlink" title="1、加载"></a>1、加载</h4><p>”加载“（Loading）阶段是”类加载”（Class Loading）过程中的第一个过程，在加载阶段，虚拟机主要完成三件事：</p>
 <p>（1）通过一个类的全限定名来获取其定义的二进制字节流</p>
 <p>（2）将这个字节流所代表的的静态存储结构转化为方法区的运行时数据结构</p>
 <p>（3）在堆中生成一个代表这个类的Class对象，作为方法区中这些数据的访问入口</p>
-<h4 id="2、验证"><a href="#2、验证" class="headerlink" title="2、验证"></a>2、验证</h4><p>验证的主要作用就是确保被加载的类的正确性。也是连接阶段的第一步。说白了也就是我们加载好的.class文件不能对我们的虚拟机有危害，所以先检测验证一下。他主要是完成四个阶段的验证：</p>
+<p>记载阶段结束后，Java虚拟机外部的二级制字节流就按照虚拟机所设定的格式存储在方法区之中了，方法区中的数据存储格式完全由虚拟机实现自行定义。</p>
+<h4 id="2、验证"><a href="#2、验证" class="headerlink" title="2、验证"></a>2、验证</h4><p>验证是连接阶段的第一步，这一阶段目的就是确保Class文件的字节流中包含的信息符合《Java虚拟机规范》的全部验证要求。说白了也就是我们加载好的.class文件不能对我们的虚拟机有危害，所以先检测验证一下。他主要是完成四个阶段的验证：</p>
 <p> （1）文件格式的验证：验证.class文件字节流是否符合class文件的格式的规范，并且能够被当前版本的虚拟机处理 。</p>
 <p> （2）元数据验证：主要是对字节码描述的信息进行语义分析，以保证其描述的信息符合java语言规范的要求  比如说验证这个类是不是有父类，类中的字段方法是不是和父类冲突等等。 </p>
 <p> （3）字节码验证：  主要对类的方法做出分析，保证类的方法在运行时不会做出危害虚拟机安全的事。 </p>
 <p>（4）符号引用验证：它是验证的最后一个阶段，发生在虚拟机将符号引用转化为直接引用的时候。主要是对类自身以外的信息进行校验。目的是确保解析动作能够完成。</p>
-<h4 id="3、准备"><a href="#3、准备" class="headerlink" title="3、准备"></a>3、准备</h4><p>准备阶段主要为类变量分配内存并设置初始值， 这些内存都在方法区分配 。</p>
+<h4 id="3、准备"><a href="#3、准备" class="headerlink" title="3、准备"></a>3、准备</h4><p>准备阶段主要为类变量分配内存并设置初始值， 这些内存都在方法区分配 。注意：这时候进行内存分配的仅包括类变量，而不包括实例变量，实例变量会在对象实例化时随着对象一起分配在Java堆中。</p>
 <h4 id="4、解析"><a href="#4、解析" class="headerlink" title="4、解析"></a>4、解析</h4><p>解析阶段主要是虚拟机将常量池中的符号引用转化为直接引用的过程。</p>
 <p>  符号引用：以一组符号来描述所引用的目标，可以是任何形式的字面量，只要是能无歧义的定位到目标就好，就好比在班级中，老师可以用张三来代表你，也可以用你的学号来代表你，但无论任何方式这些都只是一个代号（符号），这个代号指向你（符号引用）</p>
 <p> 直接引用：直接引用是可以指向目标的指针、相对偏移量或者是一个能直接或间接定位到目标的句柄。和虚拟机实现的内存有关，不同的虚拟机直接引用一般不同。解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号引用进行。 </p>
@@ -318,6 +321,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2020/06/11/java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          java虚拟机内存模型
+        
+      </div>
+    </a>
   
   
     <a href="/2020/06/04/%E2%80%9C%E8%81%8A%E4%B8%80%E8%81%8A%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2%EF%BC%8C%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81%E2%80%9D/" id="article-nav-older" class="article-nav-link-wrap">

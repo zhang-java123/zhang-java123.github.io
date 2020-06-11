@@ -6,15 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/zhang-java123/zhang-java123.github.io.git">
-  <title>Hexo</title>
+  <title>java虚拟机内存模型 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://github.com/zhang-java123/zhang-java123.github.io.git/index.html">
+  <meta name="description" content="java虚拟机内存模型与对象创建及布局上篇文章中提到，类加载器加载.class字节码文件到虚拟机内存中，然后运行内存中的字节码指令。对于Java程序员来说，在虚拟机自动内存管理机制的帮助下，不容易出现内存泄漏和内存溢出问题，显得很是美好，但是，万一出现内存方面的问题，在不了解Java虚拟机如何使用内存的情况下，就会两眼一抹黑，那么今天就详细谈谈Java虚拟机内存的各个区域。 运行时数据区域Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java虚拟机内存模型">
+<meta property="og:url" content="https://github.com/zhang-java123/zhang-java123.github.io.git/2020/06/11/java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="java虚拟机内存模型与对象创建及布局上篇文章中提到，类加载器加载.class字节码文件到虚拟机内存中，然后运行内存中的字节码指令。对于Java程序员来说，在虚拟机自动内存管理机制的帮助下，不容易出现内存泄漏和内存溢出问题，显得很是美好，但是，万一出现内存方面的问题，在不了解Java虚拟机如何使用内存的情况下，就会两眼一抹黑，那么今天就详细谈谈Java虚拟机内存的各个区域。 运行时数据区域Java">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/images/java%E6%B5%81%E7%A8%8B.PNG">
+<meta property="og:image" content="https://github.com/images/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88.PNG">
+<meta property="og:image" content="https://github.com/images/%E4%BD%BF%E7%94%A8%E5%8F%A5%E6%9F%84.png">
+<meta property="og:image" content="https://github.com/images/%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88.png">
+<meta property="article:published_time" content="2020-06-11T12:57:29.884Z">
+<meta property="article:modified_time" content="2020-06-11T13:43:44.075Z">
 <meta property="article:author" content="zhang">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/images/java%E6%B5%81%E7%A8%8B.PNG">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,16 +159,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-java虚拟机内存模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-java虚拟机内存模型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/11/java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">java虚拟机内存模型</a>
+    <h1 class="article-title" itemprop="name">
+      java虚拟机内存模型
     </h1>
   
 
@@ -175,11 +182,85 @@
         <h1 id="java虚拟机内存模型与对象创建及布局"><a href="#java虚拟机内存模型与对象创建及布局" class="headerlink" title="java虚拟机内存模型与对象创建及布局"></a>java虚拟机内存模型与对象创建及布局</h1><p>上篇文章中提到，类加载器加载.class字节码文件到虚拟机内存中，然后运行内存中的字节码指令。对于Java程序员来说，在虚拟机自动内存管理机制的帮助下，不容易出现内存泄漏和内存溢出问题，显得很是美好，但是，万一出现内存方面的问题，在不了解Java虚拟机如何使用内存的情况下，就会两眼一抹黑，那么今天就详细谈谈Java虚拟机内存的各个区域。</p>
 <h2 id="运行时数据区域"><a href="#运行时数据区域" class="headerlink" title="运行时数据区域"></a>运行时数据区域</h2><p>Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。</p>
 <img src="/images/java流程.PNG"  />
-        
-          <a class="article-more-a" href="/2020/06/11/java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/#more">more >></a>
-        
+
+  <a id="more"></a> 
+
+<h4 id="一、程序计数器"><a href="#一、程序计数器" class="headerlink" title="一、程序计数器"></a>一、程序计数器</h4><p>程序计数器（Program Counter Register）是一块较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器，工作时就是通过改变计数器的值来选取下一条需要执行的字节码指令。它是JVM多线程实现的基础，JVM的多线程是通过线程轮流切换并分配处理器执行时间的方式来实现的。也就是说，某个线程在执行过程中可能会因为时间片耗尽而被挂起，而另一个线程获取到时间片开始执行。当被挂起的线程重新获取到时间片的时候，它要想从被挂起的地方继续执行，就必须知道它上次执行到哪个位置，因此，我们需要通过程序计数器来记录某个线程的字节码执行位置。</p>
+<p><strong>特点</strong>：</p>
+<p>（1）<strong>线程隔离性</strong>，每个线程工作时都有属于自己的独立计数器，它们互不影响。我么称它是线程私有的。</p>
+<p>（2）执行java方法时，程序计数器是有值的，且记录的是正在执行的字节码指令的地址</p>
+<p>（3）执行native本地方法时，程序计数器的值为空（Undefined）。因为native方法是java通过JNI直接调用本地C/C++库，可以近似的认为native方法相当于C/C++暴露给java的一个接口，java通过调用这个接口从而调用到C/C++方法。由于该方法是通过C/C++而不是java进行实现。那么自然无法产生相应的字节码，并且C/C++执行时的内存分配是由自己语言决定的，而不是由JVM决定的。 </p>
+<p>（4）程序计数器，是唯一一个在java虚拟机规范中没有规定任何OutOfMemoryError的区域。 </p>
+<h4 id="二、Java虚拟机栈"><a href="#二、Java虚拟机栈" class="headerlink" title="二、Java虚拟机栈"></a>二、Java虚拟机栈</h4><p>首先看看栈的概念： 栈作为一种数据结构，是一种只能在一端进行插入和删除操作的特殊线性表。它按照先进后出的原则存储数据。</p>
+<p>Java虚拟机栈（Java Virtual Machine Stack）描绘的是Java方法执行的线程内存模型，它是为虚拟机执行Java方法（也就是字节码）服务的：当方法被执行的时候，Java虚拟机会同步的创建一个栈帧（Stack Frame）用于储存局部变量表、操作数栈、动态连接、方法出口等信息。每一个方法被调用直至执行完毕的过程，就对应了一个栈帧在Java虚拟机栈中从入栈到出栈的过程。</p>
+<p><img src="/images/Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%A0%88.PNG" alt=""></p>
+<p>局部变量表：存放了编译期可知的各种Java虚拟机基本数据类型（boolean, byte, short, int, float, long, double, char,），对象引用（reference类型），returnAddress类型（指向了一条字节码指令的地址）。局部变量表所需的内存空间在编译期间完成分配，在方法运行期间不会改变局部变量表的大小。</p>
+<p> 在《Java虚拟机规划》中，对这个区域指定了两种异常状况：1.如果线程请求的栈深度大于虚拟机所允许的深度（多为无限递归）：抛出StackOverflowError异常；如果虚拟机栈可以动态扩展，如果扩展时无法申请到足够的内存，就会抛出OutOfMemoryError异常。 </p>
+<p>与程序计数器一样，Java虚拟机栈也是<strong>线程私有</strong>的，它的生命周期与线程相同。</p>
+<h4 id="三、本地方法栈"><a href="#三、本地方法栈" class="headerlink" title="三、本地方法栈"></a>三、本地方法栈</h4><p>本地方法栈（Native Method Stacks）与虚拟机栈所发挥的作用非常相似，它是为虚拟机使用到的本地方法服务。有些Java虚拟机（譬如Hot-Spot虚拟机）直接就把本地方法和虚拟机栈合二为一。</p>
+<hr>
+<h4 id="四、Java堆"><a href="#四、Java堆" class="headerlink" title="四、Java堆"></a>四、Java堆</h4><p>Java堆（Heap）是虚拟机所管理的内存中最大的一块，它是<strong>所有线程共享</strong>的一块内存区域。在虚拟机启动时创建，<strong>唯一目的就是为了存放对象实例</strong>。</p>
+<p>Java堆是垃圾收集器的管理的内存区域，因此也叫“GC堆”（Garbage Collected Heap）。</p>
+<p>从内存回收的角度来看，由于现在收集器基本采用分代回收算法，所以java堆还可以细分为新生代和老年代；从内存分配的角度来看，线程共享的java堆可以划分出多个线程私有的分配缓冲区（Thread Local Allocation Buffer, TLAB）。但无论如何划分，都与存放内容无关，无论哪个区域，存储的依然是对象的实例。进一步划分只是为了更好的回收内存和更好的分配内存。 但无论如何划分，都与存放内容无关，无论哪个区域，存储的依然是对象的实例。<strong>进一步划分只是为了更好的回收内存和更好的分配内存</strong>。</p>
+<p> Java堆是可以固定也可以扩展的，当前主流的Java虚拟机都是按照可扩展来实现的（通过参数 -Xmx和 -Xms）。如果堆中没有内存完成实力分配并且堆也无法再扩展时，将会抛出OutOfMemoryError异常 。</p>
+<h4 id="五、方法区"><a href="#五、方法区" class="headerlink" title="五、方法区"></a>五、方法区</h4><p>方法区与Java堆一样，<strong>是各个线程共享的内存区域</strong>，它用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器编译后的代码缓存等数据。 不同虚拟机在这里的实现不尽相同，这个区域很少进行垃圾回收，但并非”永久”，这个区域的内存回收目标主要是<strong>针对常量池的回收和对类型的卸载</strong>，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。 </p>
+<p><strong>运行时常量池</strong>：（Runtime Constant Pool）是方法区的一部分。运行时常量池具备动态性，所以不仅有class文件中内容才能进入常量池中。运行时也可能将新的常量放入池中，比如String.intern()方法，jvm规范规定，当常量池无法再申请到内存时会抛出OutOfMemoryError异常。</p>
+<p>在Class文件中除了有类的版本，字段，方法，接口等描述信息外，还有一项信息是常量池，用于存放编译器生成的各种字面量和符号引用，这部分内容将在类加载后进入方法区的运行时常量池中存放。一般来说，除了保存Class文件中的符号引用外，还会把翻译出来的直接引用也存储到运行时常量池中。</p>
+<h2 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h2><p>介绍完Java虚拟机运行时数据区域后，我们以最常用的虚拟机HotSpot为例，探讨一下对象在虚拟机HotSpot的创建过程。</p>
+<p>（1）在java虚拟机遇到一个字节码new指令时，首先会检查这个指令能否在常量池中定位到一个类的符号引用，检查这个符号引用代表的<strong>类是否已经被加载</strong>，解析和初始化，如果没有，那么java虚拟机立即进行加载并调用类构造器完成类的初始化 。</p>
+<p>（2）在类加载检查通过后，Java虚拟机就会为<strong>该对象分配内存</strong>， 分配内存的大小在类加载完成时就已经确定。 为对象在堆中分配空间有两种方式：1. 指针碰撞（堆中内存规整），2. 空闲列表（堆中内存不规整）。选择哪种分配方式由Java堆是否规整决定，而Java堆是否规整又由所采用的垃圾收集器是否带有空间压缩整理的能力决定。</p>
+<p>（3）内存分配完毕后，虚拟机将<strong>分配到的内存空间全部赋零值</strong>(不包括对象头) 。</p>
+<p>（4） 接下里，对对象进行必要的设置，例如这个对象是哪个类的实例，如何找到类的元数据信息，对象的哈希码，对象的GC分代年龄等信息 ，这些信息存放在对象的对象头中。</p>
+<p>（5）当前，对象所有字段默认为零值，我们还需要调用<strong>构造函数</strong>，对象中的<init>()方法完成初始化。</p>
+<h2 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h2><p>当完成了对象的创建后，我们来简要分析一下对象的内存布局，在HotSpot虚拟机里，对象的内存布局主要分为三块区域：<strong>对象头（Header），实例数据（Instance Data），对齐填充（Padding）</strong>。下面分别介绍这三个部分。</p>
+<p>（1）对象头：HotSpot虚拟机的对象头包含两部分信息，</p>
+<ol>
+<li>第一部分用于存储对象自身的运行时数据，如hashcode，GC分代年龄，线程持有的锁等信息；</li>
+<li>另一部分就是<strong>类型指针</strong>，即对象指向它的类元数据的指针，虚拟机通过这个指针来确定这个对象是哪个类的实例，如果对象是一个java数组，那么对象头中应该还有一个记录数组长度的数据。因为jvm可以通过普通java对象的元数据信息来确定对象的大小，但是无法通过数组的元数据信息确定数组的大小。</li>
+</ol>
+<p>（2）实例数据：是对象真正存储的有效信息，也是在程序代码中定义的各种类型的字段内容。无论是从父类继承还是子类定义，都需要记录。一般父类的信息会在子类之前</p>
+<p>（3）对齐填充：仅仅是占位符的作用。</p>
+<h4 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h4><p>j<strong>ava程序是通过Java虚拟机栈上栈帧里的局部变量表储存的对象引用（reference类型）来操作堆上的具体对象</strong>。jvm规范并未定义reference这个也能用应该通过何种方式去定位堆中的对象。所以对象的访问方式取决于虚拟机的具体实现，主流访问方式由<strong>使用句柄</strong>和<strong>直接指针</strong>两种：</p>
+<p>（1）句柄访问：java堆中会划分出一块内存作为句柄池，reference中存储的是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息</p>
+<img src="/images/使用句柄.png"  />
+
+<p>（2）直接指针： Java堆对象的布局中就必须考虑如何放置访问类型数据的相关信息，reference中直接存储的就是对象堆地址</p>
+<p><img src="/images/%E4%BD%BF%E7%94%A8%E6%8C%87%E9%92%88.png" alt=""></p>
+<p>两种方式各有优劣：句柄的好处是对象移动时只会改变句柄中的实例数据指针，而reference本身不用修改，但是GC较多；而直接指针的访问速度更快，只需要一次定位，句柄需要二次。HotSpot是采用直接指针的方式对对象定位的。</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -188,16 +269,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/11/java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://github.com/zhang-java123/zhang-java123.github.io.git/2020/06/11/java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/09/%E2%80%9Cjava%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%8F%8A%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E2%80%9D/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">“java中类加载器及双亲委派机制”</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -217,228 +357,14 @@
 
 
 
-
   
-    <article id="post-“java中类加载器及双亲委派机制”" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/09/%E2%80%9Cjava%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%8F%8A%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E2%80%9D/">“java中类加载器及双亲委派机制”</a>
-    </h1>
   
 
-        
-        <a href="/2020/06/09/%E2%80%9Cjava%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%8F%8A%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E2%80%9D/" class="archive-article-date">
-  	<time datetime="2020-06-09T07:32:51.819Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="java中类加载器及双亲委派机制"><a href="#java中类加载器及双亲委派机制" class="headerlink" title="java中类加载器及双亲委派机制"></a>java中类加载器及双亲委派机制</h1><p> java程序执行过程粗略来说分为两步，</p>
-<p>​    第一步：将java源码(.java文件)通过编译器(javac.exe)编译成(.class字节码文件)</p>
-<p>​    第二步： java虚拟机，通过类加载器加载Student.class字节码文件到内存，然后运行内存中的字节码指令了。 </p>
-<p><img src="D:%5Cblog%5Cblog%5Csource%5Cimages%5Cjava%E6%B5%81%E7%A8%8B.PNG" alt=""></p>
-<h2 id="一、类加载机制"><a href="#一、类加载机制" class="headerlink" title="一、类加载机制"></a>一、类加载机制</h2><p> <strong>类加载机制</strong>：Java虚拟机把描述类的数据从class文件加载到内存，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型。</p>
-        
-          <a class="article-more-a" href="/2020/06/09/%E2%80%9Cjava%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%8F%8A%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E2%80%9D/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/09/%E2%80%9Cjava%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%8F%8A%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E2%80%9D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-“聊一聊进制间转换，原码反码补码”" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/04/%E2%80%9C%E8%81%8A%E4%B8%80%E8%81%8A%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2%EF%BC%8C%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81%E2%80%9D/">“聊一聊进制间转换，原码反码补码”</a>
-    </h1>
   
 
-        
-        <a href="/2020/06/04/%E2%80%9C%E8%81%8A%E4%B8%80%E8%81%8A%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2%EF%BC%8C%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81%E2%80%9D/" class="archive-article-date">
-  	<time datetime="2020-06-04T08:46:14.789Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-04</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在计算机的底层元件中，晶体管和门电路只有开与关的两种状态，用1/0来表示恰到好处，这正好与我们的二进制理念想和，因此日常生活中我们常用十进制，而在计算机中我们常用二进制来表示。</p>
-<h2 id="二进制与十进制的转换"><a href="#二进制与十进制的转换" class="headerlink" title="二进制与十进制的转换"></a>二进制与十进制的转换</h2><p>正整数间的转换无需过多描述，如图所示：</p>
-<p>十进制转换为二进制即该数不断除以2，重复相除直到商为0，将余数由下到上排列。</p>
-<img src="/images/十转二.PNG" style="zoom:80%;" />
-
-
-
-<img src="/images/二转十小.PNG" style="zoom:50%;" />
-        
-          <a class="article-more-a" href="/2020/06/04/%E2%80%9C%E8%81%8A%E4%B8%80%E8%81%8A%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2%EF%BC%8C%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81%E2%80%9D/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/04/%E2%80%9C%E8%81%8A%E4%B8%80%E8%81%8A%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2%EF%BC%8C%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81%E2%80%9D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-linux常见指令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/02/linux%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4/">linux常见指令</a>
-    </h1>
   
 
-        
-        <a href="/2020/06/02/linux%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2020-06-02T00:41:27.948Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-02</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="linux常见指令"><a href="#linux常见指令" class="headerlink" title="linux常见指令"></a>linux常见指令</h1><p>当我们申请了一个</p>
-<p>查看firewall服务状态</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br></pre></td></tr></table></figure>
-
-<p>开启、重启、关闭 防火墙服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service firewalld start		#开启防火墙服务</span><br><span class="line"></span><br><span class="line">service firewalld restart	#重启防火墙服务</span><br><span class="line"></span><br><span class="line">service firewalld stop		#关闭防火墙服务</span><br></pre></td></tr></table></figure>
-
-<p>查看防火墙规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --list-all    # 查看全部信息</span><br><span class="line">firewall-cmd --list-ports  # 只看端口信息</span><br></pre></td></tr></table></figure>
-
-<p>开启端口</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">开端口命令：firewall-cmd --zone&#x3D;public --add-port&#x3D;80&#x2F;tcp --permanent</span><br><span class="line">重启防火墙：systemctl restart firewalld.service</span><br><span class="line"></span><br><span class="line">命令含义：</span><br><span class="line">--zone #作用域</span><br><span class="line">--add-port&#x3D;80&#x2F;tcp  #添加端口，格式为：端口&#x2F;通讯协议</span><br><span class="line">--permanent   #永久生效，没有此参数重启后失效</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/02/linux%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -461,8 +387,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
