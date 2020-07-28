@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://github.com/zhang-java123/zhang-java123.github.io.git">
-  <title>Archives | Hexo</title>
+  <title>垃圾收集器 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://github.com/zhang-java123/zhang-java123.github.io.git/archives/index.html">
+  <meta name="description" content="在介绍基本垃圾收集器以前，来补充一些基本概念： 并行（Parallel）：并行描述的是多条垃圾收集器线程之间的关系，说明同一时间有多条这样的线程在协同工作，通常默认为此时用户线程处于等待状态。 并发（Concurrent）：并发描述的是垃圾收集器线程与用户线程之间的关系，说明同一时间垃圾收集器线程与用户线程都在运行。由于垃圾收集器占用了一部分系统资源，应用程序处理的吞吐量将会受到一定的影响。 Se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="垃圾收集器">
+<meta property="og:url" content="https://github.com/zhang-java123/zhang-java123.github.io.git/2020/06/18/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在介绍基本垃圾收集器以前，来补充一些基本概念： 并行（Parallel）：并行描述的是多条垃圾收集器线程之间的关系，说明同一时间有多条这样的线程在协同工作，通常默认为此时用户线程处于等待状态。 并发（Concurrent）：并发描述的是垃圾收集器线程与用户线程之间的关系，说明同一时间垃圾收集器线程与用户线程都在运行。由于垃圾收集器占用了一部分系统资源，应用程序处理的吞吐量将会受到一定的影响。 Se">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-18T11:40:20.000Z">
+<meta property="article:modified_time" content="2020-07-28T11:26:43.414Z">
 <meta property="article:author" content="zhang">
 <meta name="twitter:card" content="summary">
   
@@ -150,292 +154,215 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-垃圾收集器" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/27/web%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2020-07-27T08:27:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/27/web%E8%AF%B7%E6%B1%82%E8%BF%87%E7%A8%8B/">web请求过程</a>
+    <h1 class="article-title" itemprop="name">
+      垃圾收集器
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/07/23/java%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%9C%BA%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-07-23T07:36:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/07/23/java%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%9C%BA%E6%9E%84/">java基本程序设计机构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/18/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" class="archive-article-date">
+        
+        <a href="/2020/06/18/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" class="archive-article-date">
   	<time datetime="2020-06-18T11:40:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-18</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/18/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/">垃圾收集器</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在介绍基本垃圾收集器以前，来补充一些基本概念：</p>
+<p><strong>并行（Parallel）</strong>：并行描述的是多条垃圾收集器线程之间的关系，说明同一时间有多条这样的线程在协同工作，通常默认为此时用户线程处于等待状态。</p>
+<p><strong>并发（Concurrent）</strong>：并发描述的是垃圾收集器线程与用户线程之间的关系，说明同一时间垃圾收集器线程与用户线程都在运行。由于垃圾收集器占用了一部分系统资源，应用程序处理的吞吐量将会受到一定的影响。</p>
+<h4 id="Serial垃圾收集器（在用）"><a href="#Serial垃圾收集器（在用）" class="headerlink" title="Serial垃圾收集器（在用）"></a>Serial垃圾收集器（在用）</h4><p>Serial(串行)收集器是最基础、历史最悠久的新生代收集器，它是<strong>单线程</strong>工作的收集器， 收集过程需要<strong>暂停所有线程</strong>。使用<strong>标记-复制算法</strong>。运行过程如下。</p>
+<p>迄今位置，它仍然是HotSpot虚拟机运行<strong>在客户端模式下的默认新生代收集器</strong>，有优于其他收集器的地方，那就是简单而高效。没有线程交互的开销，可以获得最高的单线程收集效率。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开启选项：-XX:+SerialGC</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
-          
+  <a id="more"></a> 
 
+<h4 id="Serial-Old收集器"><a href="#Serial-Old收集器" class="headerlink" title="Serial Old收集器"></a>Serial Old收集器</h4><p>Serial old是Serial收集器的<strong>老年代</strong>版本，它同样是<strong>单线程收集器，使用标记-整理算法</strong>。</p>
+<h4 id="ParNew收集器"><a href="#ParNew收集器" class="headerlink" title="ParNew收集器"></a>ParNew收集器</h4><p>ParNew收集器实质上是Serial收集器的<strong>多线程并行版本</strong>。也是<strong>新生代</strong>的收集器。除了Serial收集器以外，目前只有它能<strong>与CMS收集器配合工作</strong>，也可以理解为ParNew合并入CMS，成为它专门处理新生代的组成部分了。可以说ParNew是HotSpot虚拟机第一款退出历史舞台的垃圾收集器。</p>
+<h4 id="Parallel-Scavenge收集器"><a href="#Parallel-Scavenge收集器" class="headerlink" title="Parallel Scavenge收集器"></a>Parallel Scavenge收集器</h4><p>Parallel Scavenge（并行收集）也是一款<strong>新生代收集器</strong>，使用<strong>标记-复制算法</strong>实现垃圾回收，也是能够并<strong>行收集的多线程收集器</strong>。它的目标是达到一个可控制的吞吐量（Throughput）。所谓吞吐量就是处理器用于运行用户代码的时间与处理器总消耗时间的比值。所以它也常被称作“<strong>吞吐量优先收集器</strong>”。</p>
+<h4 id="Parallel-Old收集器"><a href="#Parallel-Old收集器" class="headerlink" title="Parallel Old收集器"></a>Parallel Old收集器</h4><p>Parallel Old收集器是Parallel Scavenge收集器的<strong>老年代</strong>版本，使用<strong>多线程和”标记-整理算法</strong>“进行垃圾回收。 在注重吞吐量或者处理器资源较为稀缺的场合，可以优先<strong>考虑Parallel Scavenge加Parallel Old收集器这个组合</strong>。工作过程如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开启选项：-XX:+UseParallelGC或-XX:+UseParallelOldGC(可互相激活)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="Concurrent-Mark-Sweep收集器"><a href="#Concurrent-Mark-Sweep收集器" class="headerlink" title="Concurrent Mark Sweep收集器"></a>Concurrent Mark Sweep收集器</h4><p>CMS（并发清除）收集器是一种以获取<strong>最短回收停顿时间</strong>为目标的收集器，使用“<strong>标记-清除</strong>”算法进行垃圾回收。目前很大一部分的Java应用程序集中在互联网网站或者基于浏览器的B/S系统的服务端上，这类应用会比较关注服务的响应速度，希望系统停顿时间尽可能短，以给用户带来良好的交互体验，CMS收集器就符合这类应用需求。</p>
+<p>它运作过程更为复杂，分为4步：</p>
+<ol>
+<li><strong>初始标记</strong>（CMS initial mark）：需要停下所有线程，标记GC Roots能直接关联到的对象，速度很快。</li>
+<li><strong>并发标记</strong>（CMS concurrent mark）：无需停下所有线程，从GC Roots能直接关联到的对象开始遍历整个对象图，耗时较长，可与垃圾收集线程一起并发运行。</li>
+<li><strong>重新标记</strong>（CMS remark） ：需要停下所有线程，修正并发标记期间，因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录。</li>
+<li><strong>并发清除</strong>（CMS concurrent sweep）：清理删除调标记阶段判断的已经死亡的对象，该阶段可以与用户线程同时并发的。</li>
+</ol>
+<p>CMS是一款优秀的收集器，一些官方文档里面也称之为“并发低停顿收集器”，但是它也有三个明显的缺点：</p>
+<ol>
+<li><strong>对处理器资源非常敏感</strong>：因为CMS默认启动的回收线程数是（处理器核心数量+3）/ 4，这意味着当处理器核心数量不足四个时，在并发清除阶段，启动的回收线程数对系统来说时一个大的负担，对用户程序的影响将会非常大。</li>
+<li><strong>无法处理“浮动垃圾”</strong>：CMS收集器无法处理浮动垃圾，有可能出现”Concurrent Mode Failure”失败而导致另一次Full GC。首先介绍以下“浮动垃圾”：由于CMS在<strong>并发标记和并发清理阶段</strong>用户线程还在运行着，伴随着程序的运行自然就还会有新的垃圾不断产生，这一部分产生的垃圾，CMS无法在这次垃圾回收中处理掉他们，只要留待下一次垃圾回收时再进行处理，这一部分产生的垃圾便称为”浮动垃圾”。同样由于在垃圾收集阶段用户线程还要继续运行，那也就还需要预留足够的内存空间给用户线程使用。因此CMS收集器不能像其他收集器那样，等到老年代被填满后再进行垃圾回收。需要预留一部分空间供并发收集时的程序运行使用。当<strong>预留的内存无法满足程序分配新对象的需要时就会出现一次“并发失败”。</strong></li>
+<li><strong>会产生大量空间碎片</strong>：CMS是一款基于“标记-清除”算法实现的收集器,(可以看GC堆与元空间这篇博客），这就意味着收集结束时会有大量的空间碎片产生，会给大对象分配造成很大的麻烦，容易触发Full GC的发生。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开启选项：-XX:+UseConcMarkSweepGC</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Garbage-First收集器"><a href="#Garbage-First收集器" class="headerlink" title="Garbage First收集器"></a>Garbage First收集器</h4><p>Garabage First（G1）收集器是垃圾收集器技术发展历史上的里程碑式的成果，开创了收集器<strong>面向局部收集</strong>的设计思路和<strong>基于Region的内存布局</strong>形式，在JDK9后，G1取代了Parallel Scavenge加Parallel Old组合，<strong>成为服务器端模式下的默认垃圾收集器</strong>。</p>
+<p>G1垃圾收集器是以关注延迟为目标、服务器端应用的垃圾收集器。设计者们的目标是建立起<strong>“停顿时间模型</strong>”的收集器，即能够支持指定在一个长度为M毫秒的时间片段内，消耗在垃圾收集上的时间大概率不超过N毫秒这一目标。而G1收集器之所以能完成这个目标是因为它可以<strong>面向堆内存任何部分来组成回收集</strong>（Collection Set）来进行回收，即它的回收目标不同于之前的所有收集器（之前要么是新生代，要么老年代，要么整个堆）衡量标准不再是它属于哪个分代，而是哪块内存中存放的垃圾数量最多，回收收益最大，这就是<strong>G1收集器的Mixed GC模式</strong>。</p>
+<h5 id="基于Region的内存布局"><a href="#基于Region的内存布局" class="headerlink" title="基于Region的内存布局"></a>基于Region的内存布局</h5><p>虽然G1也是遵循分代收集理论设计的，但是它堆内存布局与其他收集器有非常明显的差异：G1不再坚持固定大小以及固定数量的分代区域划分，而是把连续的Java堆内存划分为多个大小相等的独立区域（Region），每一个区域都可以根据需要扮演新生代的Eden空间、Surivivor空间，或者老年代空间。收集器对不同的区域采用不同的回收策略。</p>
+<p>在G1收集器中，新生代和老年代不再是固定的了，它们都是一系列区域的动态集合。而G1之所以能够建立可预测的停顿时间模型，是因为它将Region作为单次回收的最小单元，这样每次回收的内存空间都是Region大小的整数倍，而且G1收集器可以跟踪各个Region里面的垃圾，知晓回收所获得的空间大小和回收所需的时间，然后在后台维护一个优先级列表，每次根据用户设定所允许的收集停顿时间来优先处理回收收益大的Region，这是“Garbage First”名字的又来。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://github.com/zhang-java123/zhang-java123.github.io.git/2020/06/18/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/18/springboot%E7%B2%97%E7%95%A5%E7%89%88/" class="archive-article-date">
-  	<time datetime="2020-06-18T07:49:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-18</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2020/07/23/java%E5%9F%BA%E6%9C%AC%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E6%9C%BA%E6%9E%84/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          java基本程序设计机构
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/18/springboot%E7%B2%97%E7%95%A5%E7%89%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">springboot</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/18/springboot%E7%B2%97%E7%95%A5%E7%89%88/">springboot</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/16/%E6%95%B4%E5%90%88ssm%E6%A1%86%E6%9E%B6%E7%B2%97%E7%95%A5%E7%89%88/" class="archive-article-date">
-  	<time datetime="2020-06-16T07:36:01.262Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/16/%E6%95%B4%E5%90%88ssm%E6%A1%86%E6%9E%B6%E7%B2%97%E7%95%A5%E7%89%88/">整合ssm框架粗略版</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/12/GC%E5%A0%86%E5%92%8C%E5%85%83%E7%A9%BA%E9%97%B4/" class="archive-article-date">
-  	<time datetime="2020-06-12T07:25:20.295Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/12/GC%E5%A0%86%E5%92%8C%E5%85%83%E7%A9%BA%E9%97%B4/">GC堆和元空间</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/11/java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E5%8F%8A%E5%B8%83%E5%B1%80/" class="archive-article-date">
-  	<time datetime="2020-06-11T12:57:29.884Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/11/java%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E5%8F%8A%E5%B8%83%E5%B1%80/">java虚拟机内存模型与对象创建及布局</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/09/%E2%80%9Cjava%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%8F%8A%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E2%80%9D/" class="archive-article-date">
-  	<time datetime="2020-06-09T07:32:51.819Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-09</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/09/%E2%80%9Cjava%E4%B8%AD%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%8F%8A%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E2%80%9D/">“java中类加载器及双亲委派机制”</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/04/%E2%80%9C%E8%81%8A%E4%B8%80%E8%81%8A%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2%EF%BC%8C%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81%E2%80%9D/" class="archive-article-date">
-  	<time datetime="2020-06-04T08:46:14.789Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/04/%E2%80%9C%E8%81%8A%E4%B8%80%E8%81%8A%E8%BF%9B%E5%88%B6%E9%97%B4%E8%BD%AC%E6%8D%A2%EF%BC%8C%E5%8E%9F%E7%A0%81%E5%8F%8D%E7%A0%81%E8%A1%A5%E7%A0%81%E2%80%9D/">“聊一聊进制间转换，原码反码补码”</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/06/02/linux%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2020-06-02T00:41:27.948Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-02</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/06/02/linux%E5%B8%B8%E8%A7%81%E6%8C%87%E4%BB%A4/">linux常见指令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -458,8 +385,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
